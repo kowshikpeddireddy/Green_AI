@@ -1,0 +1,2 @@
+id,project_name,experiment_description,epoch,start_time,duration(s),power_consumption(kWh),CO2_emissions(kg),CPU_name,GPU_name,OS,region/country,cost
+997a2ccd-2fe3-427e-945e-40daa33ea727,Deafult project name,no experiment description,N/A,2024-02-29 12:14:01,2.5189461708068848,5.830619856321088e-09,3.647478355378352e-09,"11th Gen Intel(R) Core(TM) i5-1135G7 @ 2.40GHz/1 device(s), TDP:28.0", 0 device(s),Windows,IN/Tamil Nadu,0

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Emission Data</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to right, #74ebd5, #ACB6E5);
+            color: #333;
+            text-align: center;
+        }
+        h1 {
+            color: #fff;
+            animation: slideInFromLeft 1s ease-out;
+        }
+        table {
+            width: 80%;
+            margin: 20px auto;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+            border-collapse: collapse;
+            overflow: hidden;
+            border-radius: 8px;
+        }
+        th, td {
+            padding: 10px;
+            background: linear-gradient(to bottom, #ffffff, #D3CCE3);
+            color: #333;
+        }
+        th {
+            background: linear-gradient(to right, #4b6cb7, #182848);
+            color: #fff;
+            text-shadow: 0 1px 1px rgba(0,0,0,0.1);
+        }
+        tr:hover:not(:first-child) {
+            background: linear-gradient(to right, #4b6cb7, #182848);
+            color: #fff;
+        }
+        tr:first-child:hover {
+            background: none;
+        }
+
+        @keyframes slideInFromLeft {
+            0% {
+                transform: translateX(-100%);
+                opacity: 0;
+            }
+            100% {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Emission Data</h1>
+    <table border="1">
+        <tr>
+            <th>Time</th>
+            <th>Power Consumption (kWh)</th>
+            <th>CO2 Emissions (kg)</th>
+            <th>CPU Name</th>
+            <th>Operating System</th>
+            <th>Region/Country</th>
+        </tr>
+        {% for i in range(time|length) %}
+        <tr>
+            <td>{{ time[i] }}</td>
+            <td>{{ power_consumption[i] }}</td>
+            <td>{{ co2_emissions[i] }}</td>
+            <td>{{ cpu_name[i] }}</td>
+            <td>{{ os[i] }}</td>
+            <td>{{ region[i] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

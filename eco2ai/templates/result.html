@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Classification Result</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+            color: #333;
+        }
+        h1 ,h2{
+            text-align: center;
+            margin-top: 20px;
+        }
+        img {
+            display:flex;
+            margin: 0 auto;
+            margin-top: 20px;
+            max-width: 80%;
+            height: auto;
+        }
+        p {
+            text-align: center;
+            margin-top: 10px;
+        }
+        strong {
+            font-weight: bold;
+        }
+        .alternative-section {
+            margin-top: 40px;
+            border-top: 2px solid #ccc;
+            padding-top: 20px;
+        }
+        .alternative-info {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin-top: 20px;
+        }
+        .alternative-info img {
+            max-width: 40%;
+            height: auto;
+        }
+        .alternative-info p {
+            max-width: 50%;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <h1>Image Classification Result</h1>
+    <p><strong>Predicted Label:</strong> {{ predicted_label }}</p>
+    <img src="{{ url_for('static', filename=filename) }}" alt="Uploaded Image" width="224" height="224">
+
+    {% if predicted_label %}
+        <h2>Item Information</h2>
+        <p><strong>Description:</strong>
+            {% if predicted_label == 'battery' %}
+                Batteries contain toxic chemicals and heavy metals. Not eco-friendly or recyclable.
+            {% elif predicted_label == 'biological' %}
+                Biological waste, such as food scraps, can be composted to produce fertilizer. Eco-friendly and recyclable.
+            {% elif predicted_label == 'brown-glass' %}
+                Brown glass is widely recyclable and can be melted down to make new glass products. Eco-friendly and recyclable.
+            {% elif predicted_label == 'cardboard' %}
+                Cardboard is biodegradable and can be recycled into new cardboard products. Eco-friendly and recyclable.
+            {% elif predicted_label == 'clothes' %}
+                Clothing contributes to environmental pollution and waste. Not eco-friendly or recyclable in most cases.
+            {% elif predicted_label == 'green-glass' %}
+                Green glass is widely recyclable and can be melted down to make new glass products. Eco-friendly and recyclable.
+            {% elif predicted_label == 'metal' %}
+                Metal is highly recyclable and can be melted down and reused indefinitely. Eco-friendly and recyclable.
+            {% elif predicted_label == 'paper' %}
+                Paper is biodegradable and can be recycled into new paper products. Eco-friendly and recyclable.
+            {% elif predicted_label == 'plastic' %}
+                Plastic pollution is a major environmental issue. Some types of plastic can be recycled, but many end up in landfills or oceans. Not eco-friendly in most cases, but recyclable.
+            {% elif predicted_label == 'shoes' %}
+                Shoes are typically made from a variety of materials, including leather, rubber, and synthetic fibers. Not eco-friendly or recyclable in most cases.
+            {% elif predicted_label == 'trash' %}
+                Trash consists of non-recyclable waste materials that end up in landfills. Not eco-friendly or recyclable.
+            {% elif predicted_label == 'white-glass' %}
+                White glass is widely recyclable and can be melted down to make new glass products. Eco-friendly and recyclable.
+            {% endif %}
+        </p>
+        <p><strong>CO2 Emissions:</strong>
+            {% if predicted_label == 'battery' %}
+                150 grams
+            {% elif predicted_label == 'biological' %}
+                20 grams
+            {% elif predicted_label == 'brown-glass' %}
+                50 grams
+            {% elif predicted_label == 'cardboard' %}
+                30 grams
+            {% elif predicted_label == 'clothes' %}
+                200 grams
+            {% elif predicted_label == 'green-glass' %}
+                40 grams
+            {% elif predicted_label == 'metal' %}
+                60 grams
+            {% elif predicted_label == 'paper' %}
+                25 grams
+            {% elif predicted_label == 'plastic' %}
+                100 grams
+            {% elif predicted_label == 'shoes' %}
+                180 grams
+            {% elif predicted_label == 'trash' %}
+                250 grams
+            {% elif predicted_label == 'white-glass' %}
+                45 grams
+            {% endif %}
+        </p>
+        <p><strong>Eco-Friendly:</strong>
+            {% if predicted_label == 'battery' or predicted_label == 'clothes' or predicted_label == 'plastic' or predicted_label == 'shoes' or predicted_label == 'trash' %}
+                No
+            {% else %}
+                Yes
+            {% endif %}
+        </p>
+        <p><strong>Recyclable:</strong>
+            {% if predicted_label == 'battery' or predicted_label == 'clothes' or predicted_label == 'shoes' or predicted_label == 'trash' %}
+                No
+            {% else %}
+                Yes
+            {% endif %}
+        </p>
+
+        {% if alternative %}
+            <div class="alternative-section">
+                <h2>Recommended Alternative</h2>
+                <div class="alternative-info">
+                    <img src="{{ url_for('static', filename=alternative['url']) }}" alt="Recommended Alternative Image">
+                    <div>
+                        <p><strong>Name:</strong> {{ alternative['name'] }}</p>
+                        <p><strong>Reason:</strong> {{ alternative['reason'] }}</p>
+                        <p><strong>CO2 Emissions:</strong> {{ alternative['CO2 Emissions'] }}</p>
+                        <p><strong>Recyclable:</strong> {{ alternative['Recyclable'] }}</p>
+                        <p><strong>Strengths:</strong> {{ alternative['Strengths'] }}</p>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    {% endif %}
+</body>
+</html>

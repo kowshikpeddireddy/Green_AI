@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Energie</title>
+
+<link rel="shortcut icon" href="favicon.png" type="image/x-icon">
+<script>function Calculate(){
+    var suggestions = [];
+
+        //appliance[ac]
+    var acNo = document.getElementById("ac").value;
+    var acHour = document.getElementById("acHour").value;
+    var acPower = 1700;
+    var acMaxPower = 25000;
+    var totalAcHour = acNo * acPower;
+    var acday = totalAcHour * acHour;
+    var acMonth = acday * 30/1000;
+
+    //appliance[Tv]
+    var tvNo = document.getElementById("tv").value;
+    var tvHour = document.getElementById("tvHour").value;
+    var tvPower = 70;
+    var tvMaxPower = 350;
+    var totaltvHour = tvNo * tvPower;
+    var tvday = totaltvHour * tvHour;
+    var tvMonth = tvday * 30/1000;
+
+    //appliance[fridge]
+    var fridgeNo = document.getElementById("fridge").value;
+    var fridgeHour = document.getElementById("fridgeHour").value;
+    var fridgePower = 250;
+    var fridgeMaxPower = 6000;
+    var totalfridgeHour = fridgeNo * fridgePower;
+    var fridgeday = totalfridgeHour * fridgeHour;
+    var fridgeMonth = fridgeday * 30/1000;
+
+    //appliance[WashingMachine]
+    var wmNo = document.getElementById("wm").value;
+    var wmHour = document.getElementById("wmHour").value;
+    var wmPower = 255;
+    var wmMaxPower = 600;
+    var totalwmHour = wmNo * wmPower;
+    var wmday = totalwmHour * wmHour;
+    var wmMonth = wmday * 30/1000;
+
+    //appliance[geyser]
+    var geyserNo = document.getElementById("geyser").value;
+    var geyserHour = document.getElementById("geyserHour").value;
+    var geyserPower = 2000;
+    var geyserMaxPower = 6000;
+    var totalgeyserHour = geyserNo * geyserPower;
+    var geyserday = totalgeyserHour * geyserHour;
+    var geyserMonth = geyserday * 30/1000;
+
+    //appliance[microwave]
+    var microNo = document.getElementById("micro").value;
+    var microHour = document.getElementById("microHour").value;
+    var microPower = 2500;
+    var microMaxPower = 5000;
+    var totalmicroHour = microNo * microPower;
+    var microday = totalmicroHour * microHour;
+    var microMonth = microday * 30/1000;
+
+    //appliance[comp]
+    var compNo = document.getElementById("comp").value;
+    var compHour = document.getElementById("compHour").value;
+    var compPower = 1500;
+    var compMaxPower = 6000;
+    var totalcompHour = compNo * compPower;
+    var compday = totalcompHour * compHour;
+    var compMonth = compday * 30/1000;
+
+    //appliance[bulb]
+    var blbNo = document.getElementById("blb").value;
+    var blbHour = document.getElementById("blbHour").value;
+    var blbPower = 10;
+    var blbMaxPower = 950;
+    var totalblbHour = blbNo * blbPower;
+    var blbday = totalblbHour * blbHour;
+    var blbMonth = blbday * 30/1000;
+
+    //appliance[fans]
+    var fansNo = document.getElementById("fans").value;
+    var fansHour = document.getElementById("fansHour").value;
+    var fansPower = 35;
+    var fansMaxPower = 5000;
+    var totalfansHour = fansNo * fansPower;
+    var fansday = totalfansHour * fansHour;
+    var fansMonth = fansday * 30/1000;
+
+    //appliance[Induction cooker]
+    var icNo = document.getElementById("ic").value;
+    var icHour = document.getElementById("icHour").value;
+    var icPower = 1900;
+    var icMaxPower = 6000;
+    var totalicHour = icNo * icPower;
+    var icday = totalicHour * icHour;
+    var icMonth = icday * 30/1000;
+
+    //appliance[tubeLight]
+    var tubeNo = document.getElementById("tube").value;
+    var tubeHour = document.getElementById("tubeHour").value;
+    var tubePower = 15;
+    var tubeMaxPower = 1000;
+    var totaltubeHour = tubeNo * tubePower;
+    var tubeday = totaltubeHour * tubeHour;
+    var tubeMonth = tubeday * 30/1000;
+
+
+    var elRate = document.getElementById("elRate").value;
+    var totalUsage = 0;
+
+    document.getElementById("acday").innerHTML = acday/1000;
+    document.getElementById("acMonth").innerHTML = (acday/1000)*30;
+    document.getElementById("acmnSpnt").innerHTML = (acday/1000)*30*elRate;
+
+    totalUsage += (acday/1000)*30;
+
+    if (acday > acMaxPower) {
+        suggestions.push("You should Decrease the Usage of A/c or you should buy an Ac with more efficient power usage ")
+    };
+
+    document.getElementById("tvday").innerHTML = tvday/1000;
+    document.getElementById("tvMonth").innerHTML = (tvday/1000)*30;
+    document.getElementById("tvmnSpnt").innerHTML = (tvday/1000)*30*elRate;
+
+    totalUsage += (tvday/1000)*30;
+
+    if (tvday > tvMaxPower) {
+        suggestions.push("You should Decrease the Usage of TV or you should buy a Tv with more efficient power usage ")
+    };
+
+    document.getElementById("fridgeday").innerHTML = fridgeday/1000;
+    document.getElementById("fridgeMonth").innerHTML = (fridgeday/1000)*30;
+    document.getElementById("fridgemnSpnt").innerHTML = (fridgeday/1000)*30*elRate;
+
+    totalUsage += (fridgeday/1000)*30;
+
+    if (fridgeday > fridgeMaxPower) {
+        suggestions.push("You should Decrease the Usage of fridge or you should buy a fridge with more efficient power usage ")
+    };
+
+    document.getElementById("wmday").innerHTML = wmday/1000;
+    document.getElementById("wmMonth").innerHTML = (wmday/1000)*30;
+    document.getElementById("wmmnSpnt").innerHTML = (wmday/1000)*30*elRate;
+
+    totalUsage += (wmday/1000)*30;
+
+    if (wmday > wmMaxPower) {
+        suggestions.push("You should Decrease the Usage of Washing Machine or you should buy a washing Machine with more efficient power usage ")
+    };
+
+    document.getElementById("geyserday").innerHTML = geyserday/1000;
+    document.getElementById("geyserMonth").innerHTML = (geyserday/1000)*30;
+    document.getElementById("geysermnSpnt").innerHTML = (geyserday/1000)*30*elRate;
+
+    totalUsage += (geyserday/1000)*30;
+
+
+    if (geyserday > geyserMaxPower) {
+        suggestions.push("You should Decrease the Usage of Geyser or you should buy a geyser with more efficient power usage ")
+    };
+
+    document.getElementById("microday").innerHTML = microday/1000;
+    document.getElementById("microMonth").innerHTML = (microday/1000)*30;
+    document.getElementById("micromnSpnt").innerHTML = (microday/1000)*30*elRate;
+
+    totalUsage += (microday/1000)*30;
+
+    if (microday > microMaxPower) {
+        suggestions.push("You should Decrease the Usage of Microwave or you should buy a Microwave with more efficient power usage ")
+    };
+
+    document.getElementById("compday").innerHTML = compday/1000;
+    document.getElementById("compMonth").innerHTML = (compday/1000)*30;
+    document.getElementById("compmnSpnt").innerHTML = (compday/1000)*30*elRate;
+
+    totalUsage += (compday/1000)*30;
+
+    if (compday > compMaxPower) {
+        suggestions.push("You should Decrease the Usage of computer or you should buy a computer with more efficient power usage ")
+    };
+
+    document.getElementById("blbday").innerHTML = blbday/1000;
+    document.getElementById("blbMonth").innerHTML = (blbday/1000)*30;
+    document.getElementById("blbmnSpnt").innerHTML = (blbday/1000)*30*elRate;
+
+    totalUsage += (blbday/1000)*30;
+
+    if (blbday > blbMaxPower) {
+        suggestions.push("You should Turn off the bulbs when not in use or use the bulbs which are more power efficient ")
+    };
+
+    document.getElementById("fanday").innerHTML = fansday/1000;
+    document.getElementById("fanMonth").innerHTML = (fansday/1000)*30;
+    document.getElementById("fanmnSpnt").innerHTML = (fansday/1000)*30*elRate;
+
+    totalUsage += (fansday/1000)*30;
+
+
+    if (fansday > fansMaxPower) {
+        suggestions.push("You should Turn off the fans when not in use or use the fans which are more power efficient ")
+    };
+
+    document.getElementById("icday").innerHTML = icday/1000;
+    document.getElementById("icMonth").innerHTML = (icday/1000)*30;
+    document.getElementById("icmnSpnt").innerHTML = (icday/1000)*30*elRate;
+
+    totalUsage += (icday/1000)*30;
+
+
+    if (icday > icMaxPower) {
+        suggestions.push("You should Decrease the Usage of Induction cooker or you should buy an Induction cookerwith more efficient power usage")
+    };
+
+    document.getElementById("tubeday").innerHTML = tubeday/1000;
+    document.getElementById("tubeMonth").innerHTML = (tubeday/1000)*30;
+    document.getElementById("tubemnSpnt").innerHTML = (tubeday/1000)*30*elRate;
+
+    totalUsage += (tubeday/1000)*30;
+
+
+    if (tubeday > tubeMaxPower) {
+        suggestions.push("Turn off the tubelights when not in use or use the Tubes which are more power efficient ")
+    };
+
+
+var co2Factor = 0.5;
+
+            // Calculate CO2 emissions for each appliance
+            var co2Emissions = [
+                (acday / 1000) * 30 * co2Factor,     // A/c
+                (tvday / 1000) * 30 * co2Factor,     // TV
+                (fridgeday / 1000) * 30 * co2Factor, // Fridge
+                (wmday / 1000) * 30 * co2Factor,     // Washing Machine
+                (geyserday / 1000) * 30 * co2Factor, // Geyser
+                (microday / 1000) * 30 * co2Factor,  // Microwave
+                (compday / 1000) * 30 * co2Factor,   // Computer
+                (blbday / 1000) * 30 * co2Factor,    // Bulb
+                (fansday / 1000) * 30 * co2Factor,   // Fans
+                (icday / 1000) * 30 * co2Factor,     // Induction Cooker
+                (tubeday / 1000) * 30 * co2Factor    // Tubelight
+            ];
+
+            // Display CO2 emissions for each appliance
+            for (var i = 0; i < co2Emissions.length; i++) {
+                document.getElementById("co2_" + i).innerHTML = "Estimated CO2 emissions: " + co2Emissions[i].toFixed(2) + " kg";
+            }
+
+
+    if (suggestions.length == 0) {
+        document.getElementById("sgst").innerHTML = "You dont need any suggestions, you are using electricity wisely! ⚡"
+    } else {
+        document.getElementById("sgst").innerHTML = suggestions.join("<br>") + "</p> Rest is well 😊</p>";
+    }
+
+    //Now begins the code for calculating total expenses and usage....
+    document.getElementById("ttlpwr").innerHTML = "Total electricity usage (in kilowatt) : " + totalUsage;
+    document.getElementById("emCost").innerHTML = "Estimated bill amount : " + totalUsage * elRate;
+
+    if (elRate == 0) {
+        alert("Please enter the Price of electricity")
+    }
+
+        // var appliances = ["1","2","3"]
+        var appliances2 = ["A/c","tv","fridge","Washing-Machine","Geyser","Microwave","Computer","Bulb","fans","Induction-Cooker","Tubelight"];
+        var values = [acMonth,tvMonth,fridgeMonth,wmMonth,geyserMonth,microMonth,compMonth,blbMonth,fansMonth,icMonth,tubeMonth];
+        var color = ["#f0f01a","#0000ff","#25D086","#ff0000","#ffffff","#00ffff","#8080ff","#408080","#ff0080","#804040","#008040"]
+        new Chart("chart", {
+            type: "pie",
+            data: {
+              labels: appliances2,
+              datasets: [{
+                backgroundColor: color,
+                data: values
+              }]
+            },
+            options: {
+              title: {
+                display: true,
+                text: "Graphical representation of your Electricity usage per appliance 📊"
+              }
+            }
+          });
+         document.getElementById("scr").style.display = "block";
+
+    }
+
+
+
+</script>
+
+    <style>
+        body{
+    background-color: #243547;
+
+
+}
+table {
+    background-color: #34495e;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    border-radius: 5px;
+    margin-right: 1cm;
+    margin-left: 1cm;
+}
+th,td,p,h1,label,input{
+    color: #d6cf58;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+input{
+        background-color: #243547;
+        border: 2px solid #d6cf58;
+        border-radius:5px;
+}
+button{
+    color:#d6cf58;
+    background-color:  #34495e;
+    border:2px solid #d6cf58;
+    padding: 10px;
+    width:3cm;
+    margin-left:1cm;
+
+
+
+}
+.but{
+    float:left;
+    width: 20%;
+}
+.suggstandrslt{
+    float:left;
+    width:50%;
+}
+.chart{
+    float:left;
+    width:50%;
+}
+#scr{
+    size: 10px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color:#d6cf58;
+    display: none;
+    float:inline-end;
+    width:70%
+}
+    </style>
+</head>
+<body>
+    <h1>Energie</h1>
+    <p>Energie helps you to estimate your monthly electricity bill and helps you analyze about what usage you should decrease and helps you to become more Eco-friendly towards mother nature </p>
+    <label for="elcCost">Rate of electricity in your area (per kilowatt)</label>
+    <input type="number" name="" id="elRate">
+    <br>
+    <br>
+
+    <table cellpadding="5px" class="rwd-table">
+        <tr>
+            <th>Name of appliance</th>
+            <th>No. of appliance BEING USED</th>   
+            <th>No. of hours it is used per day (if it is in minutes please <br>write it in decimals eg 30 mins = 0.5 hrs)</th>       
+            <th>Total Power used in a one day (output only) (in kilowatt)</th>
+            <th>Total power consumed in Month (output only) (in kilowatt)</th>
+            <th>Money spent </th>
+            <th>CO2 emissions (kg)</th>
+        </tr>
+        <tr>
+            <td>A/c</td>
+            <td> <input type="number" name="" id="ac"></td>
+            <td> <input type="number" name="" id="acHour"></td>
+            <td id="acday"></td>
+            <td id="acMonth"></td>
+            <td id="acmnSpnt"></td>
+            <td id="co2_0"></td>
+        
+        </tr>
+        <tr>
+            <td> Tv </td>
+            <td> <input type="number" name="" id="tv"></td>
+            <td> <input type="number" name="" id="tvHour"></td>
+            <td id="tvday"></td>
+            <td id="tvMonth"></td>
+            <td id="tvmnSpnt"></td>
+            <td id="co2_1"></td>
+
+        </tr>
+        <tr>
+            <td> Fridge </td>
+            <td> <input type="number" name="" id="fridge"></td>
+            <td> <input type="number" name="" id="fridgeHour"></td>
+            <td id="fridgeday"></td>
+            <td id="fridgeMonth"></td>
+            <td id="fridgemnSpnt"></td>
+            <td id="co2_2"></td>
+        </tr>
+        <tr>
+            <td> Washing Machine </td>
+            <td> <input type="number" name="" id="wm"></td>
+            <td> <input type="number" name="" id="wmHour"></td>
+            <td id="wmday"></td>
+            <td id="wmMonth"></td>
+            <td id="wmmnSpnt"></td>
+            <td id="co2_3"></td>
+        </tr>
+        <tr>
+            <td> Geyser </td>
+            <td> <input type="number" name="" id="geyser"></td>
+            <td> <input type="number" name="" id="geyserHour"></td>
+            <td id="geyserday"></td>
+            <td id="geyserMonth"></td>
+            <td id="geysermnSpnt"></td>
+            <td id="co2_4"></td>
+        </tr>
+        <tr>
+            <td> Microwave </td>
+            <td> <input type="number" name="" id="micro"></td>
+            <td> <input type="number" name="" id="microHour"></td>
+            <td id="microday"></td>
+            <td id="microMonth"></td>
+            <td id="micromnSpnt"></td>
+            <td id="co2_5"></td>
+        </tr>
+        <tr>
+            <td> Computer </td>
+            <td> <input type="number" name="" id="comp"></td>
+            <td> <input type="number" name="" id="compHour"></td>
+            <td id="compday"></td>
+            <td id="compMonth"></td>
+            <td id="compmnSpnt"></td>
+            <td id="co2_6"></td>
+        </tr>
+        <tr>
+            <td> LED Bulb</td>
+            <td> <input type="number" name="" id="blb"></td>
+            <td> <input type="number" name="" id="blbHour"></td>
+            <td id="blbday"></td>
+            <td id="blbMonth"></td>
+            <td id="blbmnSpnt"></td>
+            <td id="co2_7"></td>
+        </tr>
+        <tr>
+            <td> Fans </td>
+            <td> <input type="number" name="" id="fans"></td>
+            <td> <input type="number" name="" id="fansHour"></td>
+            <td id="fanday"></td>
+            <td id="fanMonth"></td>
+            <td id="fanmnSpnt"></td>
+            <td id="co2_8"></td>
+        </tr>
+        <tr>
+            <td>Induction cooker</td>
+            <td> <input type="number" name="" id="ic"></td>
+            <td> <input type="number" name="" id="icHour"></td>
+            <td id="icday"></td>
+            <td id="icMonth"></td>
+            <td id="icmnSpnt"></td>
+            <td id="co2_9"></td>
+        </tr>
+        <tr>
+            <td>LED TubeLight</td>
+            <td> <input type="number" name="" id="tube"></td>
+            <td> <input type="number" name="" id="tubeHour"></td>
+            <td id="tubeday"></td>
+            <td id="tubeMonth"></td>
+            <td id="tubemnSpnt"></td>
+            <td id="co2_10"></td>
+
+        </tr>
+    </table>
+    <datalist id="yesorno"> 
+        <option value="Yes"></option>
+        <option value="No"></option>
+    </datalist> 
+    <br>
+<div class="but"><button onclick="Calculate()" id="btn">Calculate</button></div> <div id="scr"> Scroll down for more results</div>
+<br>
+<br>
+<div class="suggstandrslt">
+<p id="ttlpwr"></p>
+<p id="emCost"></p>
+<p id="sgst"></p>
+</div>
+
+
+<div class="chart">
+    <canvas id="chart" style="width: 50; height: 50px;"></canvas>
+</div>
+
+
+</body>
+</html>

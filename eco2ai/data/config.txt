@@ -1,0 +1,1 @@
+{"project_name": "Deafult project name", "experiment_description": "no experiment description", "file_name": "emission.csv", "measure_period": 10, "pue": 1}

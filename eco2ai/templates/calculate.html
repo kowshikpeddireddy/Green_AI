@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carbon Footprint Calculator</title>
+    <!-- Add Chart.js library -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #74EBD5 0%, #9FACE6 100%);
+    color: #333;
+}
+
+.container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    background: #ffffff; /* Fallback for older browsers */
+    background: linear-gradient(to top right, #ffffff 0%, #e6e9f0 100%);
+}
+
+h1 {
+    font-size: 2em;
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+form {
+    animation: formFadeIn 1s;
+}
+
+@keyframes formFadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #555;
+}
+
+input[type="number"],
+select {
+    width: calc(100% - 12px);
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: border 0.3s, box-shadow 0.3s;
+}
+
+input[type="number"]:focus,
+select:focus {
+    border-color: #66afe9;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 0 8px rgba(102, 175, 233, 0.6);
+}
+
+button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+button:hover {
+    background-color: #45a049;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+button:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+#result {
+    margin-top: 30px;
+    text-align: center;
+    animation: resultFadeIn 1s;
+}
+
+@keyframes resultFadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+#myChart {
+    max-width: 600px;
+    margin: 20px auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Carbon Footprint Calculator</h1>
+        <form id="carbonForm">
+            <label for="answer_1">Electric Bill:</label>
+            <input type="number" id="answer_1" name="answer_1">
+
+            <label for="answer_2">Electric Usage (kWh):</label>
+            <input type="number" id="answer_2" name="answer_2">
+
+            <label for="answer_3">Number of Flights:</label>
+            <input type="number" id="answer_3" name="answer_3">
+
+            <label for="answer_4">Do you Drive?</label>
+            <select id="answer_4" name="answer_4">
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+            </select>
+
+            <label for="answer_5">Miles Driven:</label>
+            <input type="number" id="answer_5" name="answer_5">
+
+            <label for="answer_6">Use Public Transport?</label>
+            <select id="answer_6" name="answer_6">
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+            </select>
+
+            <label for="answer_8">Number of Uber Trips:</label>
+            <input type="number" id="answer_8" name="answer_8">
+
+            <label for="answer_9">Vegetarian?</label>
+            <select id="answer_9" name="answer_9">
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+            </select>
+
+            <label for="answer_10">Meat Lover?</label>
+            <select id="answer_10" name="answer_10">
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+            </select>
+
+            <label for="answer_11">Amazon Expenses:</label>
+            <input type="number" id="answer_11" name="answer_11">
+
+            <button type="button" onclick="calculateFootprint()">Calculate</button>
+        </form>
+
+        <div id="result"></div>
+        <canvas id="myChart" width="400" height="400"></canvas>
+    </div>
+
+    <script>
+        function calculateFootprint() {
+            try {
+                let answer_1 = document.getElementById("answer_1").value;
+                let answer_2 = document.getElementById("answer_2").value;
+                let answer_3 = document.getElementById("answer_3").value;
+                let answer_4 = document.getElementById("answer_4").value;
+                let answer_5 = document.getElementById("answer_5").value;
+                let answer_6 = document.getElementById("answer_6").value;
+                let answer_8 = document.getElementById("answer_8").value;
+                let answer_9 = document.getElementById("answer_9").value;
+                let answer_10 = document.getElementById("answer_10").value;
+                let answer_11 = document.getElementById("answer_11").value;
+
+                answer_1 = answer_1.replace('$', '');
+                answer_11 = answer_11.replace('$', '').replace(' ', '');
+
+                let electric_ = (parseInt(answer_2) / parseInt(answer_1)) * 12 / 0.214;
+                let flight_ = parseFloat(answer_3) * 286.88;
+
+                let transportation_;
+                if (answer_4 === 'yes' && answer_6 === 'no') {
+                    transportation_ = parseFloat(answer_5) * 1.61 * 0.435 * 2 * 220;
+                } else if (answer_4 === 'yes' && answer_6 === 'yes') {
+                    transportation_ = parseFloat(answer_5) * 1.61 * 0.298 * 2 * 220;
+                } else if (answer_4 === 'no' && answer_6 === 'yes') {
+                    transportation_ = parseFloat(answer_5) * 1.61 * 0.161 * 2 * 220;
+                }
+
+                transportation_ += parseFloat(answer_8) * 2.61 * 12;
+
+                let food_;
+                if (answer_9 === 'yes') {
+                    food_ = 1542.21406;
+                } else if (answer_10 === 'yes') {
+                    food_ = 2993.70964;
+                } else {
+                    food_ = 2267.96185;
+                }
+
+                let retail_ = 0.1289 * parseFloat(answer_11);
+
+                let footprint = electric_ + flight_ + transportation_ + food_ + retail_;
+                let footprintbytype = [electric_, flight_, transportation_, food_, retail_];
+
+                let labels_footprint = ['Electric', 'Flight', 'Transportation', 'Food', 'Retail'];
+                let resultHTML = '<h2>Carbon Footprint Results</h2>';
+                resultHTML += '<p>Total Carbon Footprint: ' + footprint.toFixed(2) + ' kg CO2/year</p>';
+                resultHTML += '<h3>Carbon Footprint by Type</h3>';
+                resultHTML += '<ul>';
+                footprintbytype.forEach((value, index) => {
+                    resultHTML += '<li>' + labels_footprint[index] + ': ' + value.toFixed(2) + ' kg CO2/year</li>';
+                });
+                resultHTML += '</ul>';
+                document.getElementById('result').innerHTML = resultHTML;
+
+                // Create pie chart
+                let ctx = document.getElementById('myChart').getContext('2d');
+
+                let chart = new Chart(ctx, {
+                    type: 'pie',
+                    data: {
+                        labels: labels_footprint,
+                        datasets: [{
+                            label: 'Carbon Footprint by Type',
+                            data: footprintbytype,
+                            backgroundColor: [
+                                'rgba(255, 99, 132, 0.7)',
+                                'rgba(54, 162, 235, 0.7)',
+                                'rgba(255, 206, 86, 0.7)',
+                                'rgba(75, 192, 192, 0.7)',
+                                'rgba(153, 102, 255, 0.7)',
+                            ],
+                            borderColor: [
+                                'rgba(255, 99, 132, 1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 206, 86, 1)',
+                                'rgba(75, 192, 192, 1)',
+                                'rgba(153, 102, 255, 1)',
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: false, // Set to true if you want chart to be responsive
+                        maintainAspectRatio: false, // Set to true if you want to maintain aspect ratio
+                    }
+                });
+
+            } catch (error) {
+                console.log('Error:', error);
+                document.getElementById('result').innerHTML = '<p>An error occurred. Please check your input.</p>';
+            }
+        }
+    </script>
+</body>
+</html>
